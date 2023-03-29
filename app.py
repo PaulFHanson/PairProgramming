@@ -1,16 +1,16 @@
 from flask import Flask, request, render_template, redirect, url_for
-
 app = Flask(__name__)
 
-friends_dict = [
-    {"name": "Test", "flavor": "swirl", "read": "yes", "activities": "reading"}
+
+book_list = [
+    {"Title": "Hobbit", "Author": "J.R.R Tolken", "Pages" : "450", "Classification": "Fiction", "Details": "I bought it"}
 ]
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template(
-        "index.html", pageTitle="Web form template", friends=friends_dict
+        "index.html", pageTitle="Web form template", books=book_list
     )
 
 
@@ -21,35 +21,39 @@ def add():
 
         form = request.form
 
-        fname = form["fname"]
-        flavor = form["flavor"]
-        read = form["read"]
-        activities = form.getlist("activities")  # this is a PYthon list
+        title = form["btitle"]
+        author = form["author"]
+        pages = form["pages"]
+        classification = form["classification"]
+        details = form.getlist("details")
 
-        print(fname)
-        print(flavor)
-        print(read)
-        print(activities)
+        print(title)
+        print(author)
+        print(pages)
+        print(classification)
+        print(details)
 
-        activities_string = ", ".join(activities)  # make the Python list into a string
+        details_string = ", ".join(details)
 
-        friend_dict = {
-            "name": fname,
-            "flavor": flavor,
-            "read": read,
-            "activities": activities_string,
+
+        book_dict = {
+            "title": title,
+            "author": author,
+            "pages": pages,
+            "classification": classification,
+            "details": details_string
         }
 
-        print(friend_dict)
-        friends_dict.append(
-            friend_dict
-        )  # append this dictionary entry to the larger friends dictionary
-        print(friends_dict)
+        print(book_dict)
+        book_list.append(
+            book_dict
+        ) 
+        print(book_dict)
         return redirect(url_for("index"))
     else:
         return redirect(url_for("index"))
 
-@app.route('/about')
+@app.route('/about/')
 def about():
     return render_template("about.html")
 

@@ -4,103 +4,103 @@
 <main>
   <form action="/add" method="POST">
     <p>
-      <label for="first-name">First name:</label>
-      <input type="text" id="first-name" name="fname" />
-    </p>
-
-    <p>
-      <label for="ice-cream">
-        Favorite flavor of ice cream:
-        <select name="flavor" id="ice-cream" required>
-          <option value="" selected>Choose one ...</option>
-          <option value="vanilla">Vanilla</option>
-          <option value="chocolate">Chocolate</option>
-          <option value="swirl">Swirl</option>
-        </select>
-      </label>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="btitle" />
     </p>
     <p>
-      <label>Do you read for fun?</label>
-      <label for="read-yes">
-        <input
-          type="radio"
-          id="read-yes"
-          name="read"
-          value="yes"
-          required="required"
-        />
-        Yes
-      </label>
-
-      <label for="read-no">
-        <input
-          type="radio"
-          id="read-no"
-          name="read"
-          value="no"
-          required="required"
-        />
-        No
-      </label>
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" />
     </p>
+    <p>
+      <label for="pages">Pages:</label>
+      <input type="text" id="pages" name="pages" />
+    </p>
+    <label>Classification</label>
+    <input type="radio" id="non-fiction" name="classification" value="Non-fiction">
+    <label for="non-fiction">Non-Fiction</label>
+    <input type="radio" id="fiction" name="classification" value="Fiction">
+    <label for="fiction">Fiction</label>
+          
 
     <fieldset>
-      <legend>Choose your favorite activities</legend>
-      <label for="for-running">
+      <legend>Details</legend>
+      <label for="owned">
         <input
           type="checkbox"
-          id="for-running"
-          name="activities"
-          value="running"
+          id="owned"
+          name="details"
+          value="owned"
         />
-        Running
+        I own this book
       </label>
-
-      <label for="for-biking">
+      <nav></nav>
+      <label for="read-only">
         <input
           type="checkbox"
-          id="for-biking"
-          name="activities"
-          value="biking"
+          id="read-only"
+          name="details"
+          value="read-only"
         />
-        Biking
+        Ive read this book
       </label>
-
-      <label for="for-reading">
+      <nav></nav>
+      <label for="liked">
         <input
           type="checkbox"
-          id="for-reading"
-          name="activities"
-          value="reading"
+          id="liked"
+          name="details"
+          value="liked"
         />
-        Reading
+        I liked this book
+      </label>
+      <nav></nav>
+      <label for="rec">
+        <input
+          type="checkbox"
+          id="rec"
+          name="details"
+          value="rec"
+        />
+        I recommend this book
       </label>
     </fieldset>
+    <nav></nav>
+    <label for="get_book">How did you get this book:</label>
 
-    <p><input type="submit" id="submit" value="Submit" /></p>
+      <select name="get_book" id="get_book">
+      <option value="bought">I bought it myself</option>
+      <option value="gift">It was a gift</option>
+      <option value="lib">Got it from the library</option>
+      <option value="loan">A friend loaned it to me</option>
+    </select>
+
+    <p><input type="submit" id="add_book" value="Add Book" /></p>
   </form>
 
+
   <br /><br />
-  {% if friends %}
-  <h3>Friend List</h3>
+  {% if books %}
+  <h3>Book List</h3>
   <hr />
   <table border="1">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Favorite Ice Cream</th>
-        <th>Read for Fun</th>
-        <th>Favorite Activities</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Pages</th>
+        <th>Classification</th>
+        <th>Details</th>
       </tr>
     </thead>
 
     <tbody>
-      {% for friend in friends %}
+      {% for book in books %}
       <tr>
-        <td>{{ friend.name }}</td>
-        <td>{{ friend.flavor }}</td>
-        <td>{{ friend.read }}</td>
-        <td>{{ friend.activities }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.pages }}</td>
+        <td>{{ book.classification }}</td>
+        <td>{{ book.details }}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -108,3 +108,4 @@
   {% endif %}
 </main>
 {% endblock %}
+  
