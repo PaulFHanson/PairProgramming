@@ -1,10 +1,21 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 app = Flask(__name__)
-
+app.config["SECRET_KEY"] = "alsknq3rAg$GernaeasSEF^woei4r098HRFYUKioq73498"
 
 book_list = [
     {"Title": "Hobbit", "Author": "J.R.R Tolken", "Pages" : "450", "Classification": "Fiction", "Details": "I bought it"}
 ]
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("500.html"), 500
+
+
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -49,6 +60,7 @@ def add():
             book_dict
         ) 
         print(book_dict)
+        flash("Record added successfully!")
         return redirect(url_for("index"))
     else:
         return redirect(url_for("index"))
