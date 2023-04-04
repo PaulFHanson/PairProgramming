@@ -3,7 +3,9 @@ label {
   width: 6em;
   margin-bottom: 0.5em;
 }
-
+body {
+  background-color: #DBF9FC;
+  }
 input[type="text"] {
   width: 15em;
   margin-left: 1em;
